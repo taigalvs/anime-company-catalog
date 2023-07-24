@@ -1,20 +1,18 @@
-import 'antd/dist/antd.css'
-import './globals.less'
+import { Layout, Row } from 'antd'
+import Image from 'next/image'
+import styles from '~/styles/RootLayout.module.less'
 
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
-
-export const metadata: Metadata = {
-  title: 'Anime Catalog',
-  description: 'A Catalog of Animes built using Next.js and Ant Design',
-}
+const { Header } = Layout
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <Layout>
+      <Header className={styles.header}>
+        <Row justify="center">
+          <Image src="/assets/logo.svg" alt="logo" width={120} height={120} />
+        </Row>
+      </Header>
+      {children}
+    </Layout>
   )
 }

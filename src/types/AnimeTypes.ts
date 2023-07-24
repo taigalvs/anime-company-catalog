@@ -26,23 +26,12 @@ export interface AnimeAttributes {
   coverImageTopOffset?: number
   titles?: Titles
   canonicalTitle?: string
-  abbreviatedTitles?: string[]
-  averageRating?: string
-  ratingFrequencies?: Record<string, string>
-  userCount?: number
-  favoritesCount?: number
-  startDate?: string
-  endDate?: string
-  nextRelease?: string
-  popularityRank?: number
-  ratingRank?: number
-  ageRating?: string
-  ageRatingGuide?: string
-  subtype?: string
-  status?: string
-  tba?: string
   posterImage: PosterImage
   coverImage?: CoverImage
+  episodeCount?: number
+  youtubeVideoId?: string
+  averageRating?: string
+  categories?: string[]
 }
 
 export interface Anime {
