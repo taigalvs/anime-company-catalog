@@ -12,7 +12,8 @@
 - Less
 - ESLint
 - Prettier
-- 
+- Jest
+- React Testing Library
 
 ## Getting Started
 
