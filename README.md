@@ -14,6 +14,7 @@
 - Prettier
 - Jest
 - React Testing Library
+- Kitsu API
 
 ## Getting Started
 
