@@ -88,53 +88,63 @@ const AnimeCatalog = () => {
 
   return (
     <main className={styles.main}>
-      <Space direction="horizontal" size={12}>
-        <Search placeholder="Search..." onSearch={onSearch} enterButton />
-        <Select
-          allowClear={true}
-          showSearch={true}
-          clearIcon={<CloseCircleFilled color="#F4893B" />}
-          placeholder="Select Genre"
-          style={{ width: 200 }}
-          onChange={setSelectedGenre}
-        >
-          {genres.map((genre) => (
-            <Option key={genre} value={genre}>
-              {genre}
-            </Option>
-          ))}
-        </Select>
-        <Select
-          allowClear={true}
-          showSearch={true}
-          clearIcon={<CloseCircleFilled color="#F4893B" />}
-          placeholder="Select Status"
-          style={{ width: 200 }}
-          onChange={setSelectedStatus}
-        >
-          {statuses.map((status) => (
-            <Option className={styles.option} key={status} value={status}>
-              {status}
-            </Option>
-          ))}
-        </Select>
-        <Select
-          className={styles.select}
-          allowClear={true}
-          showSearch={true}
-          clearIcon={<CloseCircleFilled color="#F4893B" />}
-          placeholder="Select Year"
-          style={{ width: 200 }}
-          onChange={setSelectedYear}
-        >
-          {years.map((year) => (
-            <Option className={styles.option} key={year} value={year}>
-              {year}
-            </Option>
-          ))}
-        </Select>
-      </Space>
-      <Row gutter={[22, 22]}>
+      <Row gutter={[16, 16]}>
+        <Col xs={24} sm={24} md={24} lg={24} xl={24}>
+          <Search placeholder="Search..." onSearch={onSearch} enterButton />
+        </Col>
+      </Row>
+      <Row gutter={[16, 16]}>
+        <Col xs={24} sm={24} md={24} lg={8} xl={8}>
+          <Select
+            allowClear={true}
+            showSearch={true}
+            clearIcon={<CloseCircleFilled color="#F4893B" />}
+            placeholder="Select Genre"
+            style={{ width: '100%' }}
+            onChange={setSelectedGenre}
+          >
+            {genres.map((genre) => (
+              <Option key={genre} value={genre}>
+                {genre}
+              </Option>
+            ))}
+          </Select>
+        </Col>
+        <Col xs={24} sm={24} md={24} lg={8} xl={8}>
+          <Select
+            allowClear={true}
+            showSearch={true}
+            clearIcon={<CloseCircleFilled color="#F4893B" />}
+            placeholder="Select Status"
+            style={{ width: '100%' }}
+            onChange={setSelectedStatus}
+          >
+            {statuses.map((status) => (
+              <Option className={styles.option} key={status} value={status}>
+                {status}
+              </Option>
+            ))}
+          </Select>
+        </Col>
+        <Col xs={24} sm={24} md={24} lg={8} xl={8}>
+          <Select
+            className={styles.select}
+            allowClear={true}
+            showSearch={true}
+            clearIcon={<CloseCircleFilled color="#F4893B" />}
+            placeholder="Select Year"
+            style={{ width: '100%' }}
+            onChange={setSelectedYear}
+          >
+            {years.map((year) => (
+              <Option className={styles.option} key={year} value={year}>
+                {year}
+              </Option>
+            ))}
+          </Select>
+        </Col>
+      </Row>
+      <Row gutter={[16, 16]}>
         {isLoading ? (
           Array.from({ length: 8 }).map((_, index) => (
             <Col xs={24} sm={12} md={8} lg={6} xl={6}>
