@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Input, Pagination, Modal, Skeleton, Row, Col, Select, Empty, Space } from 'antd'
+import { Card, Input, Pagination, Modal, Skeleton, Row, Col, Select, Empty } from 'antd'
 import { AnimatePresence, motion } from 'framer-motion'
 import styles from '~/styles/AnimeCatalog.module.less'
 import { CloseCircleFilled } from '@ant-design/icons'
