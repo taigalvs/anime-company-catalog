@@ -2,7 +2,7 @@
 - Listagem de animes
 - Opções de Filtragem: Os resultados da busca podem ser refinados por ano, status (por exemplo, finalizado, em andamento) e gênero.
 - Detalhes do Anime: Ao clicar em um anime nos resultados da busca, serão exibidas informações detalhadas sobre o anime. Isso inclui a trailer (se disponível), sinopse, tags de gênero, ano e o status do anime.
-- [`Resultado final do projetp`](https://anime-company-catalog.vercel.app/)
+- [`Resultado final do projeto`](https://anime-company-catalog.vercel.app/)
 
 ## 🛠️ Tecnologias utilizadas
 - Next.js
