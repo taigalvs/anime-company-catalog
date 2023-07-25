@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Input, Pagination, Modal, Skeleton, Row, Col } from 'antd'
+import { Card, Input, Pagination, Modal, Skeleton, Row, Col, Select, Empty, Space } from 'antd'
 import { AnimatePresence, motion } from 'framer-motion'
 import styles from '~/styles/AnimeCatalog.module.less'
+import { CloseCircleFilled } from '@ant-design/icons'
 
 import { Anime } from '../types/AnimeTypes'
 import { fetchAnimes } from '~/services/animeService'
@@ -10,6 +11,7 @@ import AnimeDetail from '~/components/AnimeDetail'
 
 const { Meta } = Card
 const { Search } = Input
+const { Option } = Select
 
 const AnimeCatalog = () => {
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -18,7 +20,27 @@ const AnimeCatalog = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [search, setSearch] = useState('')
   const [selectedGenre, setSelectedGenre] = useState('')
+  const [selectedStatus, setSelectedStatus] = useState('')
+  const [selectedYear, setSelectedYear] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
+
+  const genres = [
+    'Action',
+    'Adventure',
+    'Comedy',
+    'Drama',
+    'Fantasy',
+    'Horror',
+    'Romance',
+    'Sci-Fi',
+  ]
+  const statuses = ['current', 'finished', 'tba', 'unreleased', 'upcoming']
+
+  const currentYear = new Date().getFullYear()
+  const startYear = 1980
+  const numberOfYears = currentYear - startYear + 1
+
+  const years = Array.from({ length: numberOfYears }, (_, index) => String(currentYear - index))
 
   const showModal = (anime: Anime) => {
     setSelectedAnime(anime)
@@ -36,7 +58,13 @@ const AnimeCatalog = () => {
   const getAllAnimes = async () => {
     try {
       setIsLoading(true)
-      const response = await fetchAnimes(currentPage, search, selectedGenre)
+      const response = await fetchAnimes(
+        currentPage,
+        search,
+        selectedGenre,
+        selectedStatus,
+        selectedYear,
+      )
       const data = response.data
 
       if (!data || !Array.isArray(data.data)) {
@@ -56,57 +84,109 @@ const AnimeCatalog = () => {
 
   useEffect(() => {
     getAllAnimes()
-  }, [currentPage, search, selectedGenre])
+  }, [currentPage, search, selectedGenre, selectedStatus, selectedYear])
 
   return (
     <main className={styles.main}>
-      <Search placeholder="Search..." onSearch={onSearch} enterButton />
+      <Space direction="horizontal" size={12}>
+        <Search placeholder="Search..." onSearch={onSearch} enterButton />
+        <Select
+          allowClear={true}
+          showSearch={true}
+          clearIcon={<CloseCircleFilled color="#F4893B" />}
+          placeholder="Select Genre"
+          style={{ width: 200 }}
+          onChange={setSelectedGenre}
+        >
+          {genres.map((genre) => (
+            <Option key={genre} value={genre}>
+              {genre}
+            </Option>
+          ))}
+        </Select>
+        <Select
+          allowClear={true}
+          showSearch={true}
+          clearIcon={<CloseCircleFilled color="#F4893B" />}
+          placeholder="Select Status"
+          style={{ width: 200 }}
+          onChange={setSelectedStatus}
+        >
+          {statuses.map((status) => (
+            <Option className={styles.option} key={status} value={status}>
+              {status}
+            </Option>
+          ))}
+        </Select>
+        <Select
+          className={styles.select}
+          allowClear={true}
+          showSearch={true}
+          clearIcon={<CloseCircleFilled color="#F4893B" />}
+          placeholder="Select Year"
+          style={{ width: 200 }}
+          onChange={setSelectedYear}
+        >
+          {years.map((year) => (
+            <Option className={styles.option} key={year} value={year}>
+              {year}
+            </Option>
+          ))}
+        </Select>
+      </Space>
       <Row gutter={[22, 22]}>
-        {isLoading
-          ? Array.from({ length: 12 }).map((_, index) => (
-              <Col xs={24} sm={12} md={8} lg={6} xl={6}>
-                <Card
-                  data-testid={`anime-card-loading-${index}`}
-                  className={styles.card}
-                  key={index}
-                  hoverable
-                  bordered={false}
-                >
-                  <Skeleton.Image style={{ width: 200, height: 300 }} />
-                </Card>
-              </Col>
-            ))
-          : animes.map((anime) => (
-              <Col xs={24} sm={12} md={8} lg={6} xl={6}>
-                <Card
-                  data-testid="anime-card"
-                  className={styles.card}
-                  key={anime.id}
-                  hoverable
-                  bordered={false}
-                  cover={
-                    <Image
-                      src={anime.attributes.posterImage.original || ''}
-                      alt={anime.attributes.canonicalTitle || ''}
-                      width={200}
-                      height={365}
-                    />
-                  }
-                  onClick={() => showModal(anime)}
-                >
-                  <Meta
-                    title={anime.attributes.canonicalTitle}
-                    description={`Episodes: ${anime.attributes.episodeCount || 'N/A'}`}
+        {isLoading ? (
+          Array.from({ length: 8 }).map((_, index) => (
+            <Col xs={24} sm={12} md={8} lg={6} xl={6}>
+              <Card
+                data-testid={`anime-card-loading-${index}`}
+                className={styles.card}
+                key={index}
+                hoverable
+                bordered={false}
+              >
+                <Skeleton.Image style={{ width: 200, height: 300 }} />
+              </Card>
+            </Col>
+          ))
+        ) : animes.length > 0 ? (
+          animes.map((anime) => (
+            <Col xs={24} sm={12} md={8} lg={6} xl={6}>
+              <Card
+                data-testid="anime-card"
+                className={styles.card}
+                key={anime.id}
+                hoverable
+                bordered={false}
+                cover={
+                  <Image
+                    src={anime.attributes.posterImage.original || ''}
+                    alt={anime.attributes.canonicalTitle || ''}
+                    width={200}
+                    height={365}
+                    objectFit="cover"
                   />
-                </Card>
-              </Col>
-            ))}
+                }
+                onClick={() => showModal(anime)}
+              >
+                <Meta
+                  title={anime.attributes.canonicalTitle}
+                  description={`Episodes: ${anime.attributes.episodeCount || 'N/A'}`}
+                />
+              </Card>
+            </Col>
+          ))
+        ) : (
+          <Row className={styles.emptyContent}>
+            <Empty description="No animes found" />
+          </Row>
+        )}
       </Row>
       <Pagination
         className={styles.pagination}
         defaultCurrent={1}
         defaultPageSize={12}
-        pageSizeOptions={['12', '24', '36', '48']}
+        showSizeChanger={false}
         total={500}
         onChange={onPageChange}
       />

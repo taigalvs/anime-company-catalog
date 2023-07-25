@@ -30,6 +30,7 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
+    "@ant-design/icons": "^5.1.4",
     "@testing-library/jest-dom": "^5.17.0",
     "jest-environment-jsdom": "^29.6.1",
     "ts-jest": "^29.1.1"

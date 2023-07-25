@@ -6,7 +6,7 @@ const { Header } = Layout
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <Layout>
+    <Layout className={styles.layout}>
       <Header className={styles.header}>
         <Row justify="center">
           <Image src="/assets/logo.svg" alt="logo" width={120} height={120} />

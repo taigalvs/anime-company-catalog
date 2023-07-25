@@ -10,11 +10,11 @@ const theme: ThemeConfig = {
     colorBorder: 'rgba(255, 255, 255, 0.20)',
     colorPrimaryBorder: 'rgba(255, 255, 255, 0.20)',
     borderRadius: 19,
+    colorIcon: '#fff',
   },
   components: {
     Button: {
       colorPrimary: '#F4893B',
-      colorIcon: '#fff',
     },
     Layout: {
       colorBgHeader: '#11052C',
@@ -32,7 +32,7 @@ const theme: ThemeConfig = {
       colorBorder: 'transparent',
       colorText: '#fff',
       colorBgContainer: 'rgba(38, 27, 62, 0.80)',
-      colorTextPlaceholder: 'rgba(255, 255, 255, 0.20)',
+      colorTextPlaceholder: '#fff',
       colorPrimaryHover: 'rgba(255, 255, 255, 0.20)',
     },
     Pagination: {
@@ -42,12 +42,16 @@ const theme: ThemeConfig = {
       colorPrimaryHover: 'rgba(255, 255, 255, 0.20)',
     },
     Select: {
-      colorText: 'rgba(38, 27, 62, 0.80)',
-      borderRadius: 12,
+      controlHeight: 60,
+      colorBorder: 'transparent',
+      colorText: '#F4893B',
+      fontSizeIcon: 24,
+      colorBgContainer: 'rgba(38, 27, 62, 0.80)',
+      colorTextPlaceholder: '#fff',
+      colorPrimaryHover: 'rgba(255, 255, 255, 0.20)',
     },
 
     Modal: {
-      colorIcon: '#fff',
       contentBg: 'transparent',
       colorBgContainer: 'red',
       colorBgBase: 'red',

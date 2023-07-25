@@ -32,6 +32,8 @@ export interface AnimeAttributes {
   youtubeVideoId?: string
   averageRating?: string
   categories?: string[]
+  status?: string
+  startDate?: string
 }
 
 export interface Anime {
